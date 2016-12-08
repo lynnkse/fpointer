@@ -7,12 +7,13 @@ class Card;
 class CardController;
 
 enum memFuncs {modulate_e, noise_e};
+typedef void(Card::*ptrToMemFunc)(void);
+
 
 class Card
 {
 	friend class CardController;
 public:
-	typedef void(Card::*ptrToMemFunc)(void);
 private:
 	void callMemFunction(memFuncs mf_e)
 	{
@@ -22,6 +23,7 @@ protected:
 	static map<memFuncs, ptrToMemFunc> funcMap;
 };
 
+map<memFuncs, ptrToMemFunc> Card::funcMap;
 class ModemCard_t : public Card
 {
 public:
